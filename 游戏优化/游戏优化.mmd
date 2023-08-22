@@ -1,0 +1,113 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Root topic
+
+## 游戏优化
+
+### 检测工具
+
+#### Profiler
+
+#### FraneDebugger
+
+### 优化内容
+
+#### 卡顿优化
+> collapsed=`true`
+
+
+##### GC时机
+
+##### DrawCall优化
+> collapsed=`true`
+
+
+###### 图集调整
+
+###### Mask组件
+
+###### 层级调整
+
+###### 动静分离
+
+###### GPUInstancing
+
+##### 削峰平谷
+> collapsed=`true`
+
+
+###### 分帧
+
+##### 预加载
+
+##### AB的粒度调整
+
+##### 用简单的显示代替真实阴影
+
+##### 减少更新频率
+
+##### 缓存耗时操作结果
+
+##### 对象池的使用
+
+#### 内存优化
+> collapsed=`true`
+
+
+##### UI不要mipmap
+
+##### 动画片段压缩
+
+#### 效果优化
+> collapsed=`true`
+
+
+##### 阴影的Shadow Distances
+
+#### 碰撞优化
+
+### 资源优化
+> collapsed=`true`
+
+
+#### 图片资源
+> collapsed=`true`
+
+
+##### 降低最大分辨率
+
+##### 取消Read/Write属性
+> collapsed=`true`
+
+
+###### 禁用后，Unity会把数据上传到GPU的可寻址内存<br/>并且从CPU的可寻址内存删除
+
+##### 压缩格式
+
+##### Mipmip针对性关掉
+> collapsed=`true`
+
+
+###### 节约大概1/3的内存
+
+#### 模型资源
+> collapsed=`true`
+
+
+##### 取消Read/Write
+
+### 渲染方面的优化
+
+#### Shader变体的优化
+
+##### 为什么要优化变体
+
+###### 游戏初始化的时候，一般需要提前把渲染要使用的Shader<br/>全部加载尽量，以减少游戏运行时和加载的时候代码的卡顿
+
+###### 加载完可以用Shader\.WarmupAllShaders<br/>把加载到内存的Shader全部编译一次
+
+###### 全部加载有个问题就是，项目越来越复杂的时候<br/>启动时间会长
+
+##### 后来Unity加入了变体集合ShaderVariantCollection来取代上面的全加载<br/>做按需加载，提高加载速度
