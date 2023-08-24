@@ -1,0 +1,161 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Root topic
+
+## AssetBundle
+
+### 打包
+
+#### BuildAssetBundleOptions 
+> collapsed=`true`
+
+
+##### None
+> collapsed=`true`
+
+
+###### 默认选择，使用LZMA压缩格式
+
+##### UncompressedAssetBundle
+> collapsed=`true`
+
+
+###### 完全不压缩
+> collapsed=`true`
+
+
+####### 文件很大
+
+####### 加载会快很多
+
+####### 未压缩的AB是16个byte对齐的
+
+##### ChunkBasedCompression
+> collapsed=`true`
+
+
+###### 用LZ4压缩格式
+
+#### BuildTarget
+
+### 压缩选项
+> collapsed=`true`
+
+
+#### LZMA
+> collapsed=`true`
+
+
+##### 压缩成一个Stream
+
+##### 意味着使用前要整个解压
+
+##### 优点
+> collapsed=`true`
+
+
+###### 文件最小
+> collapsed=`true`
+
+
+####### 文档提到这个格式只推荐用在一开始为了下载文件最小的情况
+
+##### 缺点
+> collapsed=`true`
+
+
+###### 首次使用的时候，因为解压需要更多的时间
+
+##### 用UnityWebRequestAssetBundle 下载的话就会自动做上面说的事情
+
+##### 一旦被解压，就应该用LZ4格式压缩到磁盘中
+> collapsed=`true`
+
+
+###### 这一步是自动的？
+
+######  用UnityWebRequestAssetBundle 下载<br/>的话就会自动做上面说的事情
+
+###### 如果用的是其他的方式下载，可以用<br/>AssetBundle\.RecompressAssetBundleAsync
+
+#### LZ4
+> collapsed=`true`
+
+
+##### 文件大小比LZMA要大
+
+##### 可以每个Asset单独压缩
+> collapsed=`true`
+
+
+###### 按需解压
+
+### 生成的AB文件
+> collapsed=`true`
+
+
+#### 没有\.manifest的文件是加载时候会用到的
+
+#### 一个AB是一个archive,内部可能包含多个文件
+
+#### 每个Bundle都会带一个Manifest文件，记录依赖和资源信息
+
+### AB依赖
+> collapsed=`true`
+
+
+#### 如果一个AB引用了另外一个包含在另外一个AB中的对象，就算是有依赖
+
+#### 如果AB引用的对象是不在AB里面的
+> collapsed=`true`
+
+
+##### 创建AB的时候就会复制一份到AB
+
+##### 有多个对象引用同一个对象，就会有多分复制的冗余
+
+#### 使用AB之前，需要先把依赖的AB先加载，<br/>Unity不会主动帮我们做，加载顺序无所谓，<br/>但创建资源实例前得保证都在内存里
+
+### AB间的重复数据
+> collapsed=`true`
+
+
+#### Unity默认不会优化掉AB之间的重复信息
+> collapsed=`true`
+
+
+##### 重复信息回导致文件更大
+
+##### 对于材质甚至会影响合批，因为Unity<br/>把每份副本当做一个单独的材质
+
+#### 如何优化掉重复信息
+> collapsed=`true`
+
+
+##### To avoid data duplication, assign the Material and its<br/> referenced Assets to its own modulesmaterials AssetBundle<br/>这里的 modulesmaterials 什么意思？
+> collapsed=`true`
+
+
+###### 应该就是单独打个AB的意思
+
+### Using AssetBundles Natively
+
+#### 本地文件夹使用AB的意思
+
+#### LoadFromMemoryAsync
+
+##### 如果Bundle用了LZMA压缩，在加载的时候就会解压
+
+#### LoadFromFile
+
+##### 这个接口对于加载未压缩的Bundle效率很高
+
+#### UnityWebRequestAssetBundle
+
+#### Loading AssetBundle Manifests
+
+##### 先加载Manifest，能获取到指定的资源的所有依赖项
+
+#### Managing Loaded AssetBundles
