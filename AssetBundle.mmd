@@ -143,64 +143,96 @@
 ###### 应该就是单独打个AB的意思
 
 ### Using AssetBundles Natively
+> collapsed=`true`
+
 
 #### 本地文件夹使用AB的意思
 
 #### LoadFromMemoryAsync
+> collapsed=`true`
+
 
 ##### 如果Bundle用了LZMA压缩，在加载的时候就会解压
 
 #### LoadFromFile
+> collapsed=`true`
+
 
 ##### 这个接口对于加载未压缩的Bundle效率很高
 
 #### UnityWebRequestAssetBundle
 
 #### Loading AssetBundle Manifests
+> collapsed=`true`
+
 
 ##### 先加载Manifest，能获取到指定的资源的所有依赖项
 
 #### Managing Loaded AssetBundles
+> collapsed=`true`
+
 
 ##### Addressables package
+> collapsed=`true`
+
 
 ###### 资源分组的概念
+> collapsed=`true`
+
 
 ####### 如果没有显式指定组，就会分到default组
 
 ###### 文档提到可以用不同的工程来做不同的资源<br/>然后再主工程里面用
 
 ###### 概念
+> collapsed=`true`
+
 
 ####### Addressable Tools
+> collapsed=`true`
+
 
 ######## package提供了几个工具和窗口来管理，构建，优化资源
 
 ####### Asset address
+> collapsed=`true`
+
 
 ######## 字符串Id用来来定位资源
 
 ####### AssetReferences
+> collapsed=`true`
+
 
 ######## 类型在Inspctor把引用拖过去，但是是按需加载<br/>又不用使用容易出错的字符串
 
 ######## 还提供了各种类型的后缀版本，避免拖错误的资源
 
 ####### Content catalogs
+> collapsed=`true`
+
 
 ######## 用来记录资源和存储目录的位置映射
 
 ####### Asset loading and Unload
+> collapsed=`true`
+
 
 ######## Addressables API，提供了函数来加载和释放资源的函数
 
 ###### 主要优点
+> collapsed=`true`
+
 
 ####### 按需加载
+> collapsed=`true`
+
 
 ######## 比如一个Prefab挂到组件上，不会一开始就把所有的资源和内存都加载
 
 ####### 自动管理内存 
+> collapsed=`true`
+
 
 ######## ReleaseInstance的时候会自动释放相应内存
 
