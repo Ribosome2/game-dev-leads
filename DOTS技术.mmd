@@ -1,0 +1,97 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Root topic
+
+## DOTS技术
+
+### Unity官方材料
+- LINK
+<pre>https://forum.unity.com/threads/dots-guide-tutorials-and-more.1342700/</pre>
+
+### github
+- LINK
+<pre>https://github.com/Unity-Technologies/EntityComponentSystemSamples/#learning-dots</pre>
+
+#### EntitySamples
+
+##### 在Entities项目， 一般要设置两个地方
+
+###### 偏好里SceneViewMode设置成Runtime Data
+
+###### ProjectSetting里的Editor启用EnterPlayModeOptions<br/>但是关闭Reload Domain和Reload Scene
+
+##### Entities文档
+- LINK
+<pre>https://docs.unity3d.com/Packages/com.unity.entities@1.0/manual/index.html</pre>
+
+##### Collections package文档
+- LINK
+<pre>https://docs.unity3d.com/Packages/com.unity.collections@1.2/manual/index.html</pre>
+
+###### Collection包提供了给jobs和Burst\-compile代码用的未托管数据结构
+
+##### Burst 文档
+- LINK
+<pre>https://docs.unity3d.com/Packages/com.unity.burst@1.6/manual/index.html</pre>
+
+###### Burst是一个编译器，使用LLVM把IL/NET代码转化成高度优化的native code
+
+##### Mathematics 文档
+- LINK
+<pre>https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html</pre>
+
+##### Job system 文档
+- LINK
+<pre>https://docs.unity3d.com/Manual/JobSystem.html</pre>
+
+##### Starter Samples
+
+###### HelloCubes
+
+####### RotationSpeedAuthoring
+
+######## Baker类
+
+######### 触发Baker类的机制是什么
+
+####### ExecuteAuthoring
+
+######## 哪些脚本会运行？，看起来只是加了不想干的Component啊
+
+######## System的OnCreate会决定RequireForUpdate的类型
+
+######## 在Bake的时候根据选项添加对应类型的Component
+
+#### Netcode Sample
+
+#### Physics samples
+
+### 重要概念
+
+#### Jobs
+
+##### 继承IJob接口
+
+##### job\.Schedule 安排
+
+###### 可以传入其他的Job作为前置依赖，控制执行顺序
+
+##### handle\.Complete完成
+
+###### 调用完成的时候，会把它的依赖job也完成了
+
+##### 只有主线程能schedule和complete jobs
+
+##### 不同的Job不能并行的访问相同的数据
+
+##### IJobChunk
+
+##### IJobParalleFor
+
+#### System
+
+##### OnCreate的时候mainScene都不一定加载完
+
+#### AutomaticBootstrapping
