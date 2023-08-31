@@ -12,8 +12,22 @@
 
 ##### 本地坐标直接转成clip space的空间
 
-##### equivalent of mul\(UNITY\_MATRIX\_MVP, float4\(pos, 1\.0\)\),
+##### 等于 mul\(UNITY\_MATRIX\_MVP, float4\(pos, 1\.0\)\),
 
 #### UnityObjectToViewPos
 
-##### equivalent of mul\(UNITY\_MATRIX\_MV, float4\(pos, 1\.0\)\)\.xyz
+##### 等于 mul\(UNITY\_MATRIX\_MV, float4\(pos, 1\.0\)\)\.xyz
+
+### 函数数据
+
+#### vertex: POSITION 顶点函数的输入
+
+##### object space坐标？
+
+#### vertex: SV\_POSITION，Fragmeng函数的输入
+
+##### 是clip spcace position
+
+##### 也就是0\-1那种NDC坐标？
+
+##### 传给frag函数的坐标
