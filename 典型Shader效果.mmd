@@ -152,11 +152,27 @@
 
 ##### 怎么让相机渲染深度到RT,毕竟URP的相机没有ClearFlag
 
-### 遮挡描边
+### 遮挡描边/Silhouette
+
+#### 分两个Pass的实现方式
+
+##### 第一个Pass
+
+######  ZWrite Off
+
+###### ZTest Always 或者Greater
+
+####### Greater应该更合理一点，<br/>毕竟没被遮住的时候就没有必要走Frag
+
+######  Cull Off/On都可以，看效果需要
+
+###### 根据情况估计得把RenderType改成Transparent<br/>只是好像没改也是OK的，有可能Unity根据上面的选项<br/>有自动做了什么
+
+##### 第二个Pass按照正常的渲染流程
+
+#### 直接在一个Pass里面取深度Buffer和当前像素深度对比的方式
 
 ### 力场 ForceField
-> collapsed=`true`
-
 
 #### 参考1
 - LINK
@@ -167,12 +183,12 @@
 <pre>https://www.youtube.com/watch?v=NiOGWZXBg4Y</pre>
 
 #### 原理
-> collapsed=`true`
-
 
 ##### 检测出护盾边缘以及护盾和场景的交界<br/>并且一次来调整护盾的透明度即可
 
 ### Bloom效果的实现
+> collapsed=`true`
+
 
 #### BasicSteps
 > collapsed=`true`
@@ -195,18 +211,26 @@
 
 
 #### Bloom Today
+> collapsed=`true`
+
 
 ##### Kawase's Filter
 
 ##### 虚幻的Convolution Bloom
 
 #### Ref
+> collapsed=`true`
+
 
 ##### Cherno的解释
+> collapsed=`true`
+
 - LINK
 <pre>https://www.youtube.com/watch?v=tI70-HIc5ro</pre>
 
 ###### 步骤
+> collapsed=`true`
+
 
 ####### Prefilter
 
