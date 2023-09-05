@@ -7,18 +7,26 @@
 ## Shader接口
 
 ### 顶点变换接口
+> collapsed=`true`
+
 
 #### UnityObjectToClipPos
+> collapsed=`true`
+
 
 ##### 本地坐标直接转成clip space的空间
 
 ##### 等于 mul\(UNITY\_MATRIX\_MVP, float4\(pos, 1\.0\)\),
 
 #### UnityObjectToViewPos
+> collapsed=`true`
+
 
 ##### 等于 mul\(UNITY\_MATRIX\_MV, float4\(pos, 1\.0\)\)\.xyz
 
 #### mul\(UNITY\_MATRIX\_M,float4\(v\.vertex\.xyz,1\)
+> collapsed=`true`
+
 
 ##### 把顶点从本地坐标转到世界坐标
 
