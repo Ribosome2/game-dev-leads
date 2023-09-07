@@ -33,12 +33,18 @@
 ##### 后面的1代表只包含位置，0的话就包含offset<br/>这里的offset指的是什么？
 
 ### 函数数据
+> collapsed=`true`
+
 
 #### vertex: POSITION 顶点函数的输入
+> collapsed=`true`
+
 
 ##### object space坐标？
 
 #### vertex: SV\_POSITION，Fragmeng函数的输入
+> collapsed=`true`
+
 
 ##### 是clip spcace position
 
@@ -47,6 +53,8 @@
 ##### 传给frag函数的坐标
 
 #### saturate
+> collapsed=`true`
+
 
 ##### 等于是clamp数值到0,1范围，Shit name \!
 
@@ -73,28 +81,42 @@
 ##### Queque
 
 ### 深度缓存相关
+> collapsed=`true`
+
 
 #### ZWrite XXX
+> collapsed=`true`
+
 
 ##### 决定是否要写入深度缓存
 
 #### ZTest 
+> collapsed=`true`
+
 
 ##### 决定要怎么根据深度缓存做事情
 
 ### 贴图
+> collapsed=`true`
+
 
 #### TRANSFORM\_TEX\(uv,tex\)
+> collapsed=`true`
+
 
 ##### 一般用在顶点函数，用来转换给frag用的<br/>自带了Tiling和Offset的设置转换
 
 ##### 如果直接o\.uv=v\.uv就没有带Tiling和Offset设置
+> collapsed=`true`
+
 
 ###### 这个时候应该在前面加\[NoScaleOffset\] <br/>来避免Inpector显式
 
 #### tex2D 取样
 
 #### tex2Dlod
+> collapsed=`true`
+
 
 ##### 如果想指定对某个等级的mipmap等级的进行取样，可以用
 
@@ -103,8 +125,12 @@
 ##### 加载的时候自己控制贴图等级？流式加载？<br/>前面先用低等级版的，后面用高等级的？
 
 ### 透明
+> collapsed=`true`
+
 
 #### 透明的方式
+> collapsed=`true`
+
 
 ##### 调用Blend 指令，然后控制a通道
 > collapsed=`true`
@@ -125,11 +151,21 @@
 ##### opaque shader里面使用clip丢弃
 
 ### bool值相关
+> collapsed=`true`
+
 
 #### 布尔值会自动转成0或者1，这就是step函数的基础
 
 #### 如果是想在两个值之间选一个可以用lerp\(A,B,maskValue\) 来代替if else<br/>maskValue就是一个bool值自动转成0或者1的
 
 ### Keywords
+> collapsed=`true`
+
 
 #### 在Inspector切换toggle不生效
+
+### 多个灯光
+
+#### \_WorldSpaceLightPosN来取灯的位置<br/>比如\_WorldSpaceLightPos0就是最主要的灯的位置
+
+#### \_LightColor0取灯的颜色
