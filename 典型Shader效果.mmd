@@ -207,6 +207,24 @@
 
 
 ##### 视野角度和摄像机的FOV得匹配
+> collapsed=`true`
+
+
+###### 首先要注意Shader和C\#间弧度和角度的转换
+> collapsed=`true`
+
+
+####### Shader的acos返回的夹角值是弧度<br/>C\#供调节的人类习惯感受更直观的是角度
+
+###### 我们理解的FOV是水平方向的，摄像机的fieldOfView设置的是垂直方向的<br/>用Camera\.HorizontalToVerticalFieldOfView\(fovX, visionDepthCamera\.aspect\);转换
+
+##### 把世界坐标转到深度摄像机的UV的过程
+> collapsed=`true`
+
+
+###### 先乘以View矩阵得到在摄像机坐标系的位置
+
+###### 再乘以投影矩阵得到NDC坐标，这个坐标对应深度图的UV
 
 ### 遮挡描边/Silhouette
 > collapsed=`true`
