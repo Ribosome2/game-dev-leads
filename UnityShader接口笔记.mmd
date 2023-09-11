@@ -97,26 +97,20 @@
 ##### 决定要怎么根据深度缓存做事情
 
 ### 贴图
-> collapsed=`true`
-
 
 #### TRANSFORM\_TEX\(uv,tex\)
-> collapsed=`true`
-
 
 ##### 一般用在顶点函数，用来转换给frag用的<br/>自带了Tiling和Offset的设置转换
 
 ##### 如果直接o\.uv=v\.uv就没有带Tiling和Offset设置
-> collapsed=`true`
-
 
 ###### 这个时候应该在前面加\[NoScaleOffset\] <br/>来避免Inpector显式
 
 #### tex2D 取样
 
-#### tex2Dlod
-> collapsed=`true`
+##### 在fragment Shader里面用的话会自动选mip level <br/>在vertex shader就不会
 
+#### tex2Dlod
 
 ##### 如果想指定对某个等级的mipmap等级的进行取样，可以用
 

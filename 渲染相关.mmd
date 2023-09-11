@@ -5,22 +5,32 @@
 # Root topic
 
 ## Shader教程
+> collapsed=`true`
+
 
 ### Freya Holmer
+> collapsed=`true`
+
 - LINK
 <pre>https://www.youtube.com/watch?v=kfM-yu0iQBk&amp;list=PLImQaTpSAdsCnJon-Eir92SZMl7tPBS4Z</pre>
 
 #### frac
+> collapsed=`true`
+
 
 ##### 本质上是取小数点，但是也可以用来看数是否超过1了，如果超过了<br/>就会有一定的重复模式
 
 #### 原来是0\-1之间插值的，要改成其他的阈值，<br/>可以用Remap的思路，也就是inverseLerp
 
 #### 闪光效果
+> collapsed=`true`
+
 
 ##### 如果不想修改原来颜色的Hue,就不用加法，改用乘法
 
 #### 圆角血条实现
+> collapsed=`true`
+
 
 ##### SDF
 > collapsed=`true`
@@ -39,8 +49,12 @@
 
 
 #### 抗锯齿
+> collapsed=`true`
+
 
 ##### 利用Fragment 函数 screen space partial direvative
+> collapsed=`true`
+
 
 ###### 使用fwidth函数就能拿到
 
@@ -71,34 +85,66 @@
 ##### TRANSFER\_VERTEX\_TO\_FRAGMENT 宏
 
 #### TangentSpace
+> collapsed=`true`
+
 
 ##### float4 表示，xyz表示方向，w表示正负
+> collapsed=`true`
+
 
 ###### 因为在处理镜像反射和法线贴图时，我们需要知道切线空间是左手坐标系还是右手坐标系。
 
 ##### 可以在VertexShader转成float3 ,没有必要每个像素算
+> collapsed=`true`
+
 
 ###### UnityObjectToWorldDir\(
 
 ##### bitangent由法线和tangent叉乘得到
+> collapsed=`true`
+
 
 ###### cross\(o\.normal,o\.tangent\) \*\(v\.tangent\.w\*unity\_ObjectTransformParams\.w\)<br/>后面的两个w也是需要的，用来处理scale和翻转
 
+##### Tangent空间转世界空间的矩阵
+> collapsed=`true`
+
+
+###### tangent\.x,tangent\.x,norml\.x<br/>tangent\.y,tangent\.y,norml\.y<br/>tangent\.z,tangent\.z,norml\.z
+> collapsed=`true`
+
+
+####### 
+
+####### 
+
+#### Normal Maps
+> collapsed=`true`
+
+
+##### 可以用来模拟水面
+> collapsed=`true`
+
+
+###### 对多个不同的NormalMaps进行取样，然后混合在一起
+
 ##### UnpackNormal函数
+> collapsed=`true`
+
 
 ###### 如果在导入设置里面贴图类型的选了NormalMap的话，Unity就会进行压缩，<br/>比如假设Normal贴图存的是单位向量的话<br/>只需要知道xy,就能反算出z,这个函数里面就是做了这个处理
 
 ###### 是在tex2d对normalMap进行取样后再传入这个函数
 
-##### Tangent空间转世界空间的矩阵
+##### Normal Intensity
+> collapsed=`true`
 
-###### tangent\.x,tangent\.x,norml\.x<br/>tangent\.y,tangent\.y,norml\.y<br/>tangent\.z,tangent\.z,norml\.z
 
-####### 
-
-####### 
+###### 在切线空间在（0,0,1）和tangentSpaceNormal之间进行插值
 
 ### 个人作品展示网站
+> collapsed=`true`
+
 
 #### Art\-station
 - LINK
