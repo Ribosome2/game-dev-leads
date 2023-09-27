@@ -1,0 +1,57 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Root topic
+
+## Profiler
+
+### 窗口4大功能区
+
+#### Profiler Modules
+
+##### 从这里要选择要对哪些模块进行profile
+
+#### Profiler Controls
+
+##### 用来切换设备还有如何执行profile
+
+#### Frame charts
+
+##### 各个Module随时间变化峰值图
+
+##### 点击module横向对应的chart可以切换Detail panel的数据显示
+
+#### Module details panel
+
+##### 三种展示模式
+
+###### Timeline
+
+###### Hierarchy
+
+###### RawHierarchy
+
+##### 有在Charts区域点击的两个坐标来决定显示内容：module类型，chart时间轴坐标
+
+##### 当选择的是CPU或者GPU的模块的时候，最上面的区域都写了CPU和GPU的总耗时<br/>很容易能判断出当前的瓶颈是在CPU还是GPU
+
+##### Live选项
+
+###### 显示当前Frame还是选中的Frame
+
+##### Thread切换
+
+###### 在Live旁边有个下来选择可以用来切换要看的目标线程
+
+### Deep Profiling
+
+#### 通常Profiler只profile 用ProfilerMarker包起来的代码<br/>包括Unity调用写的脚本的第一层堆栈，比如momo的Start,Update这种函数
+
+#### 启动Deep Profile 之后
+
+##### 对所有的script部分进行profile
+
+##### 至少包含调用UnityAPU的第一层堆栈
+
+##### Unity通过对所有的Unity函数进行注入profiler指令来达到记录所有函数调用
