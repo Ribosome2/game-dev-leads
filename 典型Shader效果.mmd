@@ -503,28 +503,42 @@
 #### 实现效果
 
 ##### depth\-based coloring 
+> collapsed=`true`
+
 
 ###### 根据水下的物体的深度来进行渐变来模拟水面深度
 
 ###### \_CameraDepthTexture 
+> collapsed=`true`
+
 
 ####### 全局可用的变量，不需要再Perperties里面声明<br/>但是要在CGPROGRAM里面声明
 
 ####### 取样过程
+> collapsed=`true`
+
 
 ######## 深度图和我们渲染的屏幕大小是一样的<br/>取样的坐标要用ComputeScreenPos得到顶点对应的<br/>屏幕坐标
+> collapsed=`true`
+
 
 ######### float4 screenPosition 
 
 ######### w值是深度值
+> collapsed=`true`
+
 
 ##########  w：用于透视除法的值，通常等于顶点到摄像机的距离
 
 ######### xy 好理解，z轴是什么？
+> collapsed=`true`
+
 
 ########## z：深度值，通常在0到1之间，但具体范围取决于平台和渲染设置。
 
 ######### w和z两个深度值的区别
+> collapsed=`true`
+
 
 ########## \- w：这是用于透视除法的值，通常等于顶点到摄像机的距离。在将顶点位置从视图空间转换到裁剪空间时，会用到这个值。<br/>在裁剪空间中，w值用于将x、y、z坐标除以w，得到归一化的设备坐标。这个过程被称为透视除法，是3D图形渲染中的一个重要步骤。
 
