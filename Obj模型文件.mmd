@@ -1,0 +1,41 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Root topic
+
+## Obj模型文件
+
+### wiki
+- LINK
+<pre>https://en.wikipedia.org/wiki/Wavefront_.obj_file</pre>
+
+### 语义
+
+#### v 开通表示顶点
+
+#### vn 开头表示顶点法线
+
+#### vt 是贴图UV
+
+#### f 是多边形面
+
+##### vertex\_index/texture\_index/normal
+
+##### 只有顶点索引的面
+
+###### f v1 v2 v3
+
+##### 顶点和uv的面
+
+###### f v1/vt1 v2/vt2 v3/vt3 \.\.\.
+
+##### 顶点\+UV\+法线
+
+###### f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 \.\.\.
+
+##### 顶点加法线（没有UV\)
+
+###### f v1//vn1 v2//vn2 v3//vn3 \.\.\.
+
+###### 其实就是UV位置留空了，但是'/'符号还得留着
