@@ -197,3 +197,5 @@
 <pre>Images/UGUI的顶点坐标规则.png</pre>
 
 ##### 会随UI组件的位置变化而变化
+
+##### 如果想按照顶点相对于某个UI节点的本地坐标做表现，可以把<br/>UI节点的worldToLocalMatrix 传到shader,然后在Shader里面  <br/>float4 worldPos = mul\(unity\_ObjectToWorld, v\.vertex\);<br/>o\.localPosition = mul\(uiWorldToObjectMatrix,worldPos\)\.xyz;
