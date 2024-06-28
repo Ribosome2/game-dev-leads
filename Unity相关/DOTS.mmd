@@ -1,0 +1,143 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Root topic
+
+## DOTS
+
+### 全称为Data Oriented Technology Stack
+
+### 面向 数据的技术栈
+
+### 包含哪些技术栈
+
+#### Entities\(ECS\)
+
+##### Entity是作为一个索引或者Id
+
+##### Components
+
+###### 每种Entity所有组件的组合称为一个ArcheType
+
+###### 以Chunk的形式存储在Ram
+
+####### 16kb
+
+###### 相同ArcheType的会存储在相同Chunk上
+
+##### Systems
+
+###### 要指定那些组合的更新
+
+###### 每帧的System分组
+
+####### Initializaiton
+
+####### Simulation
+
+####### Presentation
+
+####### UpdateInGroup 标签来指定
+
+#### Job System 
+
+##### Unity 里面的多线程系统
+
+##### Jobs are scheduled on the Main Thread
+> fillColor=`#00FF49`
+
+
+##### Worker thread execut jobs from the job queue when available
+
+##### 依赖管理
+
+##### Job 的运行方式
+
+###### Run（） 立刻在主线程运行
+
+###### Schedule\(\) 安排在一个worker thread 运行
+
+###### ScheduleParallel（）安排和其他的jobs 并行的运行在多个Worker
+
+#### BurstCompiler
+
+##### 编译阶段的优化
+
+##### SIMD
+
+###### 
+
+##### Only  workers with blittable, unmanagered data types
+
+###### blittable ?
+
+####### 只能用基本类型做的数据，不能用类的数据
+
+#### Other Packages
+
+##### Math
+
+###### Unity\.Mathematics
+
+####### Burst optimized
+
+##### Collections
+
+###### Unity\.Collections
+
+##### Graphics
+
+###### Unity\.Graphics
+
+####### Render entities
+
+######## HRP/HDRP only
+
+## 教程的步骤
+> leftSide=`true`
+
+
+### 创建SubScene,在SubScene创建的对象会自动有成为Entity的切换项
+
+#### Inspector可以预览，Entity的属性，<br/>也可以预览作为Game Object的属性，右上角切换
+
+### 改了Brain材质要关闭开启SubScene才能看到
+> leftSide=`true`
+
+
+### SubScene要勾选OpenForEditing才能看到里面的对象
+> leftSide=`true`
+
+
+### 在场景用增加Graveyard
+
+#### GraveyardProperties
+
+##### ESC数据，没法直接挂到Mono上
+
+#### Graveyard Mono
+> leftSide=`true`
+
+
+##### 就是常规的用来挂数据的脚本
+
+#### GraveyardBaker
+> leftSide=`true`
+
+
+##### 指定怎么把Mono转成ECS的数据
+
+#### 引入Aspect的概念
+
+### 加入System
+
+#### 要加BurstCompile 标签
+
+#### UpdateInGroup 来指定要在哪个SystemGroup执行
+
+#### OnUpdate里面 state\.Enabled = false; 可以让脚本只执行一次
+
+#### System只要声明运行的时候就会被加到运行逻辑里面，不需要显示实例化或者添加
+
+#### state\.RequireForUpdate 控制执行顺序
