@@ -8,7 +8,7 @@
 
 ### 全称为Data Oriented Technology Stack
 
-### 面向 数据的技术栈
+#### 面向 数据的技术栈
 
 ### 包含哪些技术栈
 
@@ -130,6 +130,10 @@
 
 #### 引入Aspect的概念
 
+##### 相当于ECS版本的Transform组件？
+
+##### 不只是Transform，还可以用来整合个各种属性
+
 ### 加入System
 
 #### 要加BurstCompile 标签
@@ -141,3 +145,63 @@
 #### System只要声明运行的时候就会被加到运行逻辑里面，不需要显示实例化或者添加
 
 #### state\.RequireForUpdate 控制执行顺序
+
+#### tombstone随机设置transform
+
+##### UniformScaleTransform
+
+##### 设置到Entity上 
+
+######   var newTombstoneTransform = graveyard\.GetRandomTombstoneTransform\(\);<br/> ecb\.SetComponent\(newTombstone,new LocalToWorldTransform\{Value = newTombstoneTransform\}\);
+
+### 墓碑上的材质随机
+
+#### Material Property Override
+
+### 在墓碑生成僵尸
+> leftSide=`true`
+
+
+#### IJobEntity
+
+### 僵尸AI
+
+#### ScheduleParallel 的时序依赖
+
+##### UpdateAfter 标签指定要在哪个system之后运行
+
+#### EntityCommandBuffer\.ParallelWriter
+
+#### EndInitializationEntityCommandBufferSystem
+
+##### spawn是begin 这个是end
+
+#### RemoveComponent 移除组件需要用到sortkey
+
+#### 让僵尸动起来
+
+##### IEnableableComponent
+
+### 脑子扣血逻辑
+
+#### DynamicBuffer
+
+### 脑子变小后，停住的僵尸要再走近的逻辑
+> leftSide=`true`
+
+
+### 摄像机逻辑
+> leftSide=`true`
+
+
+#### Mono实现
+
+## Allocator
+> leftSide=`true`
+
+
+### 如果只是在函数内分配的内存，用temp就行
+
+### 如果要持续存在就用Persistent
+> leftSide=`true`
+
