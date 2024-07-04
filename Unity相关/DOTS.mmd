@@ -5,48 +5,36 @@
 # Root topic
 
 ## DOTS
-> collapsed=`true`
-
 
 ### 全称为Data Oriented Technology Stack
-> collapsed=`true`
-
 
 #### 面向 数据的技术栈
 
 ### 包含哪些技术栈
-> collapsed=`true`
-
 
 #### Entities\(ECS\)
-> collapsed=`true`
-
 
 ##### Entity是作为一个索引或者Id
 
 ##### Components
-> collapsed=`true`
-
 
 ###### 每种Entity所有组件的组合称为一个ArcheType
 
 ###### 以Chunk的形式存储在Ram
-> collapsed=`true`
-
 
 ####### 16kb
 
 ###### 相同ArcheType的会存储在相同Chunk上
 
-##### Systems
-> collapsed=`true`
+###### ECB\.SetComponent 只能用来覆盖之前已经有的组件，如果之前没有会有奇怪报错<br/>如果只是添加可以用ECB\.AddComponent
+> fillColor=`#FF0E00`
 
+
+##### Systems
 
 ###### 要指定那些组合的更新
 
 ###### 每帧的System分组
-> collapsed=`true`
-
 
 ####### Initializaiton
 
@@ -57,14 +45,10 @@
 ####### UpdateInGroup 标签来指定
 
 ###### AutomticBootstraping
-> collapsed=`true`
-
 
 ####### 只有在项目里面定义了的都会被创建
 
 ####### 可以在OnCreate里面用的state\.RequireForUpdate，<br/>来控制某个System 是否要执行update
-> collapsed=`true`
-
 
 ######## 官方的ExecuteAuthoring 脚本就是演示了这种控制机制
 
@@ -121,58 +105,40 @@
 ####### 有指定类型组件的才运行
 
 #### BurstCompiler
-> collapsed=`true`
-
 
 ##### 编译阶段的优化
 
 ##### SIMD
-> collapsed=`true`
-
 
 ###### 
 
 ##### Only  workers with blittable, unmanagered data types
-> collapsed=`true`
-
 
 ###### blittable ?
-> collapsed=`true`
-
 
 ####### 只能用基本类型做的数据，不能用类的数据
 
 #### Other Packages
-> collapsed=`true`
-
 
 ##### Math
-> collapsed=`true`
-
 
 ###### Unity\.Mathematics
-> collapsed=`true`
-
 
 ####### Burst optimized
 
-##### Collections
-> collapsed=`true`
+####### 这个库的欧拉角函数用的是弧度值，Transform返回的是角度，要同步的话注意转换
 
+####### quaternion\.Euler 默认的顺序是ZXY，跟常规的xyz 不一样！！！
+
+##### Collections
 
 ###### Unity\.Collections
 
 ##### Graphics
-> collapsed=`true`
-
 
 ###### Unity\.Graphics
-> collapsed=`true`
-
 
 ####### Render entities
-> collapsed=`true`
-
 
 ######## HRP/HDRP only
 
@@ -339,6 +305,10 @@
 #### 底层是sourceGenerator  返回符合查询要求的Iterator
 
 ### Time
+
+### 根据Entity 查询Component
+
+####  SystemAPI\.GetComponentLookup\<T\>\(\)得到ComponentLookup，<br/>然后就可以传Entity 作为id去查询了
 
 ## Aspect
 
