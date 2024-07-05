@@ -53,22 +53,28 @@
 ######## 官方的ExecuteAuthoring 脚本就是演示了这种控制机制
 
 #### Job System 
-> collapsed=`true`
-
 
 ##### Unity 里面的多线程系统
+
+###### 可其他的DOTS模块不一样,JobSystem 是自带在Unity的CoreModule的
 
 ##### Jobs are scheduled on the Main Thread
 > fillColor=`#00FF49`
 
 
-##### Worker thread execut jobs from the job queue when available
+###### Unity管理了Worker Threadd的池子，主线程占一个核<br/>，剩下的每个核有一个对应的Worker Thread
+> fillColor=`#00FF49`
+
+
+###### Worker thread execut jobs from the job queue when available
+
+###### 一旦job开始在Worker线程运行，会一直执行到结束（not preempted
+> fillColor=`#00FF49`
+
 
 ##### 依赖管理
 
 ##### Job 的运行方式
-> collapsed=`true`
-
 
 ###### Run（） 立刻在主线程运行
 
@@ -77,30 +83,20 @@
 ###### ScheduleParallel（）安排和其他的jobs 并行的运行在多个Worker
 
 ##### IJob
-> collapsed=`true`
-
 
 ###### Execute生命了哪些参数，底层的Source Generator就会自动帮生成需要符合函数参数的query
 
 ###### IJobEntity 和IJobChunk的区别
-> collapsed=`true`
-
 
 ####### IJobChunk 在Schedule之前必须手动做一次query，<br/>并且把query的结果作为参数传给Schedule
 
 ##### 控制job运行的一些条件标签
-> collapsed=`true`
-
 
 ###### WithNone
-> collapsed=`true`
-
 
 ####### 没有指定类型组件的才运行
 
 ###### WithAll
-> collapsed=`true`
-
 
 ####### 有指定类型组件的才运行
 
@@ -108,9 +104,23 @@
 
 ##### 编译阶段的优化
 
+###### Burst是第三个编译器选项
+
+####### 默认的两个编译器
+
+######## Mono
+
+######### JIT
+
+######## IL2CPP
+
+######### AOT
+
+########## 性能更好，在一些平台的支持更好
+
 ##### SIMD
 
-###### 
+###### Burst能提升性能的原因
 
 ##### Only  workers with blittable, unmanagered data types
 
@@ -130,9 +140,27 @@
 
 ####### quaternion\.Euler 默认的顺序是ZXY，跟常规的xyz 不一样！！！
 
+####### Unity\.Mathematics cheat sheet
+- LINK
+<pre>https://github.com/Unity-Technologies/EntityComponentSystemSamples/blob/master/EntitiesSamples/Docs/cheatsheet/mathematics.md</pre>
+
 ##### Collections
 
 ###### Unity\.Collections
+
+###### provides unmanged collection types
+
+####### 数据类型分类
+
+######## Native开头的
+
+######### 操作会执行安全检查，有问题会抛异常和错误
+
+######## Unsafe开头的
+
+######### 不执行安全检查
+
+######## 不符合上面的都是struct ，没有allocate 也就不需要释放
 
 ##### Graphics
 
@@ -345,3 +373,7 @@
 ### Rukhanka \- ECS Animation System
 - LINK
 <pre>https://assetstore.unity.com/packages/tools/animation/rukhanka-ecs-animation-system-241472?aid=1101l9vRP&amp;utm_campaign=unity_affiliate&amp;utm_medium=affiliate&amp;utm_source=partnerize-linkmaker</pre>
+
+## SubScene And Baking
+
+### 每次重新运行或者编辑都会信息baking
