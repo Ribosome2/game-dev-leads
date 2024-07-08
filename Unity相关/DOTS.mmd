@@ -5,22 +5,34 @@
 # Root topic
 
 ## DOTS
+> collapsed=`true`
+
 
 ### 全称为Data Oriented Technology Stack
+> collapsed=`true`
+
 
 #### 面向 数据的技术栈
 
 ### 包含哪些技术栈
+> collapsed=`true`
+
 
 #### Entities\(ECS\)
+> collapsed=`true`
+
 
 ##### Entity是作为一个索引或者Id
 
 ##### Components
+> collapsed=`true`
+
 
 ###### 每种Entity所有组件的组合称为一个ArcheType
 
 ###### 以Chunk的形式存储在Ram
+> collapsed=`true`
+
 
 ####### 16kb
 
@@ -31,10 +43,14 @@
 
 
 ##### Systems
+> collapsed=`true`
+
 
 ###### 要指定那些组合的更新
 
 ###### 每帧的System分组
+> collapsed=`true`
+
 
 ####### Initializaiton
 
@@ -45,21 +61,29 @@
 ####### UpdateInGroup 标签来指定
 
 ###### AutomticBootstraping
+> collapsed=`true`
+
 
 ####### 只有在项目里面定义了的都会被创建
 
 ####### 可以在OnCreate里面用的state\.RequireForUpdate，<br/>来控制某个System 是否要执行update
+> collapsed=`true`
+
 
 ######## 官方的ExecuteAuthoring 脚本就是演示了这种控制机制
 
 #### Job System 
+> collapsed=`true`
+
 
 ##### Unity 里面的多线程系统
+> collapsed=`true`
+
 
 ###### 可其他的DOTS模块不一样,JobSystem 是自带在Unity的CoreModule的
 
 ##### Jobs are scheduled on the Main Thread
-> fillColor=`#00FF49`
+> collapsed=`true`,fillColor=`#00FF49`
 
 
 ###### Unity管理了Worker Threadd的池子，主线程占一个核<br/>，剩下的每个核有一个对应的Worker Thread
@@ -75,6 +99,8 @@
 ##### 依赖管理
 
 ##### Job 的运行方式
+> collapsed=`true`
+
 
 ###### Run（） 立刻在主线程运行
 
@@ -83,56 +109,92 @@
 ###### ScheduleParallel（）安排和其他的jobs 并行的运行在多个Worker
 
 ##### IJob
+> collapsed=`true`
+
 
 ###### Execute生命了哪些参数，底层的Source Generator就会自动帮生成需要符合函数参数的query
 
 ###### IJobEntity 和IJobChunk的区别
+> collapsed=`true`
+
 
 ####### IJobChunk 在Schedule之前必须手动做一次query，<br/>并且把query的结果作为参数传给Schedule
 
 ##### 控制job运行的一些条件标签
+> collapsed=`true`
+
 
 ###### WithNone
+> collapsed=`true`
+
 
 ####### 没有指定类型组件的才运行
 
 ###### WithAll
+> collapsed=`true`
+
 
 ####### 有指定类型组件的才运行
 
 #### BurstCompiler
+> collapsed=`true`
+
 
 ##### 编译阶段的优化
+> collapsed=`true`
+
 
 ###### Burst是第三个编译器选项
+> collapsed=`true`
+
 
 ####### 默认的两个编译器
+> collapsed=`true`
+
 
 ######## Mono
+> collapsed=`true`
+
 
 ######### JIT
 
 ######## IL2CPP
+> collapsed=`true`
+
 
 ######### AOT
+> collapsed=`true`
+
 
 ########## 性能更好，在一些平台的支持更好
 
 ##### SIMD
+> collapsed=`true`
+
 
 ###### Burst能提升性能的原因
 
 ##### Only  workers with blittable, unmanagered data types
+> collapsed=`true`
+
 
 ###### blittable ?
+> collapsed=`true`
+
 
 ####### 只能用基本类型做的数据，不能用类的数据
 
 #### Other Packages
+> collapsed=`true`
+
 
 ##### Math
+> collapsed=`true`
+
 
 ###### Unity\.Mathematics
+> collapsed=`true`
+
 
 ####### Burst optimized
 
@@ -145,28 +207,44 @@
 <pre>https://github.com/Unity-Technologies/EntityComponentSystemSamples/blob/master/EntitiesSamples/Docs/cheatsheet/mathematics.md</pre>
 
 ##### Collections
+> collapsed=`true`
+
 
 ###### Unity\.Collections
 
 ###### provides unmanged collection types
+> collapsed=`true`
+
 
 ####### 数据类型分类
+> collapsed=`true`
+
 
 ######## Native开头的
+> collapsed=`true`
+
 
 ######### 操作会执行安全检查，有问题会抛异常和错误
 
 ######## Unsafe开头的
+> collapsed=`true`
+
 
 ######### 不执行安全检查
 
 ######## 不符合上面的都是struct ，没有allocate 也就不需要释放
 
 ##### Graphics
+> collapsed=`true`
+
 
 ###### Unity\.Graphics
+> collapsed=`true`
+
 
 ####### Render entities
+> collapsed=`true`
+
 
 ######## HRP/HDRP only
 
@@ -373,6 +451,10 @@
 ### Rukhanka \- ECS Animation System
 - LINK
 <pre>https://assetstore.unity.com/packages/tools/animation/rukhanka-ecs-animation-system-241472?aid=1101l9vRP&amp;utm_campaign=unity_affiliate&amp;utm_medium=affiliate&amp;utm_source=partnerize-linkmaker</pre>
+
+### 动画选项wiki
+- LINK
+<pre>https://forum.unity.com/threads/dots-animation-options-wiki.1339196/</pre>
 
 ## SubScene And Baking
 
