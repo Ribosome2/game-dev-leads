@@ -18,6 +18,14 @@
 
 ##### Optimal Reciprocal Collision Avoiddance
 
+##### 解决多物体之间的避障问题
+
+##### 在多条先组成的多边形区域内找到最优解
+
+###### 高中数学的线性规划问题
+
+##### 无解的时候后退避障
+
 #### https://gamma\.cs\.unc\.edu/RVO2/
 - LINK
 <pre>https://gamma.cs.unc.edu/RVO2/</pre>
@@ -33,3 +41,47 @@
 #### B站参考
 - LINK
 <pre>https://www.bilibili.com/video/BV1Nb421n7qJ/?spm_id_from=333.999.0.0&amp;vd_source=72868cdf66be986462ce798fe9e21050</pre>
+
+#### 思路
+
+##### 找出速度VO并判断相对读物是否会落在碰撞域内
+
+##### 找出让速度向量V离开碰胡子那个域的最小附加速度向量u
+
+## CleanPath
+> leftSide=`true`
+
+
+### YouTube
+- LINK
+<pre>https://www.youtube.com/watch?v=Hc6kng5A8lQ&amp;list=PLD56A0C7765234DCD&amp;index=13&amp;ab_channel=GAMMAUMD</pre>
+
+### 文档
+- LINK
+<pre>https://gamma.cs.unc.edu/CA/</pre>
+
+## KD\-Tree
+> leftSide=`true`
+
+
+### 用来查询最近点的数据结构
+- LINK
+<pre>https://www.youtube.com/watch?v=BK5x7IUTIyU&amp;ab_channel=Computerphile</pre>
+
+## FlowField
+- LINK
+<pre>https://www.youtube.com/watch?v=tSe6ZqDKB0Y&amp;ab_channel=TurboMakesGames</pre>
+
+### 本质上是一个向量场，给定一个目标点，在当前的格子<br/>标出来要向哪个方向走才能走到目标
+
+### 跟A星的区别
+
+#### A星每个单位都要单独计算一次
+
+#### FlowField只要算一次，就能知道在各个位置的走向<br/>每个单位在当前的位置查询表就知道下一步要走到哪里
+
+### links
+
+#### Flow Field Pathfinding for Tower Defense
+- LINK
+<pre>https://www.redblobgames.com/pathfinding/tower-defense/</pre>
