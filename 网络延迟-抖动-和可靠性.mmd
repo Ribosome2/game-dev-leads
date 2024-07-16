@@ -1,0 +1,139 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Root topic
+
+## 网络延迟的种类
+
+### Processing Delay
+
+#### 解析目标地址，路由到目标的接口就是处理延迟
+
+#### 很小的因素，大多数的路由处理器都很快的
+
+### Transmision Delay
+
+#### 把字节写入物理介质的时间就是传输延迟
+
+#### 通常是跟用户端的链路层连接优化
+
+### Queue Delay
+
+#### 如果协议到达的速度比路由器处理的时间还快，就会进入等待队列<br/>在队列的等待时间就是排队延迟
+
+#### 尽量用大的数据包，而不是小的数据包传输，因为<br/>一个1400\-byte 的数据包要等待的延迟跟一个200\-byte的延迟是差不多的
+
+### Propagation delay
+
+#### 传播延迟，不管声明介质，都没法超过光速传播
+
+## Jitter
+> leftSide=`true`
+
+
+### RTT的变化就称为网络抖动
+
+### 网络抖动会导致packet 乱序
+
+## PackaetLoss
+> leftSide=`true`
+
+
+### 数据包丢失原因
+
+#### Unreliable Physical medium
+
+#### Unreliable link layer 
+
+##### 链路层有规则决定声明时候能发送数据
+
+##### Sometimes link layer channel is completely full<br/> and ann outgoing frame must be droped
+> leftSide=`true`
+
+
+#### Unreliable network layer 
+> leftSide=`true`
+
+
+##### 收协议的速度快于处理速度，数据就会放到接受队列里面<br/>当队列满了的情况，就会开始丢弃队列里面的或者后来的数据
+
+###### 优先级由网络层的header里的QoS来决定
+
+## 从可靠性对比TCP和UDP
+
+### TCP的主要优势
+
+#### 经过实践验证，健壮可靠的实现
+
+#### 保证数据传递，并且按顺序传递
+
+#### 提供了复杂的阻塞控制机制
+
+### TCP的缺点
+
+#### 数据的发送和处理得按顺序有时就会造成问题
+
+##### 低优先级的数据影响到高优先级的数据接收
+
+###### 比如Moba或者实时同步要求高的游戏，<br/>播放声音的协议（低优先级）丢包，<br/>就会导致移动或者出技能数据要跟着延迟
+
+##### Two separate streams of reliably order data  interfering with each other
+
+###### 比如游戏中的聊天信息，是需要按顺序处理<br/>但是跟FPS游戏中的headshot数据包并不需要顺序关系
+
+##### Retrasmission of stale game state
+
+###### 假设玩家B在5秒内一直从x坐标0跑到100，每秒发5次B的坐标<br/>在A玩家看来，只有中间有任意的包丢失，服务器就会重发，<br/>即使坐标数据已经过时了
+
+#### 阻塞控制
+
+##### not uniformly configurable on all platforms
+
+##### Nagle 算法可以让数据包延迟最多半秒发送
+
+###### 用TCP传输的游戏大多数都会停掉Nagle算法来避免这种问题<br/>即使是放弃它所带来的减少packat数量的好处
+
+#### 为了记录哪些数据需要重发，就得由系统分配<br/>很多资源来管理连接 难以自定义控制内存
+
+##### 基本上所有的数据都得保留备份
+
+### UDP
+
+#### 缺点是没有自带的可靠特性
+
+#### 可以自己造自己想要的可靠性
+
+##### 丢包的时候，只发最新的数据，而不是重发可能过时的数据
+
+#### 自己实现的没有经过验证，可能没有tcp那样bug\-free
+
+##### 可以用第三方的UDP库来降低这种风险
+
+###### 比如RakNet或者Photon
+
+####### RakNet
+- LINK
+<pre>http://www.jenkinssoftware.com/</pre>
+
+## Packet Delivery Notification
+> leftSide=`true`
+
+
+### 选择UDP就要实现这个模块
+
+#### DeliveryNotificationManager
+
+##### 要实现的三个功能
+
+###### 发送时 uniquely identify and tag each packet it sends out
+
+###### 接收时，对决定接收的packet发送确认接收
+> leftSide=`true`
+
+
+###### 发送端处理确认包，通知依赖模块哪些协议被接收了，哪些被丢弃了
+
+##### 保证不会处理过时协议
+
+###### 比如新packet到了，旧的协议就当作被丢掉，忽视掉<br/>防止旧协议覆盖新数据
