@@ -128,11 +128,75 @@
 
 ###### 发送时 uniquely identify and tag each packet it sends out
 
+####### Tagging Outgoing Packets
+
+######## 参考了TCP的设计，给每个packet赋值了一个序列号<br/>但是这个序列号不像TCP一样表示stream里面的bytes数<br/>只是作为一个唯一id
+
+######## InFlightPacket 发了但是还没被确认收到的
+
 ###### 接收时，对决定接收的packet发送确认接收
+> collapsed=`true`,leftSide=`true`
+
+
+####### DeliveryNotificationManager::ProcessSequenceNumber
+> collapsed=`true`
+
+
+######## 用NextExpectedSequenceNumber来决定<br/>packet要不要处理，或者丢弃 这就是保证处理顺序的机制
+
+######## 读到序列号的三种情况
+> collapsed=`true`
+
+
+######### 序列号跟预期的序列号一致
+> collapsed=`true`,fillColor=`#49FF00`
+
+
+########## 确认接收，并处理协议，预期序列号\+1
+
+######### 序列号比预期的要小
+> collapsed=`true`,leftSide=`true`,mmd.emoticon=`emotion_ghost`
+
+
+########## 意味着已经有更新的packet到达了，这个时候不需要处理，也不需要确认
+
+######### 序列号比预期的要大
+> collapsed=`true`,fillColor=`#00DBFF`,leftSide=`true`,mmd.emoticon=`lightning`
+
+
+########## 序列号小的延迟或者丢包了就会发生这种情况
+> fillColor=`#00DBFF`
+
+
+########## 这种情况直接更新预期序列号，并且进行处理和确认，<br/>意味着就算后面序列号小的来也不处理了
+> fillColor=`#00DBFF`,leftSide=`true`
+
+
+########## 做的事情跟第一种是一样的
+> fillColor=`#00DBFF`
+
+
+######## 要确认的序列号不是每个都单独确认，<br/>而是收集起来一次性发区间确认
+> collapsed=`true`
+
+
+######### 区间连续的话发一个AckRange就行，不连续就构建多个区间
+
+###### 发送端处理确认包，通知依赖模块<br/>哪些协议被接收了，哪些被丢弃了
+
+####### DeliveryNotificationManager::ProcessAcks
+
+######## 和mInFlightPackets 对比区间，已经确认的移除掉
+
+####### ProcessTimedOutPackets
 > leftSide=`true`
 
 
-###### 发送端处理确认包，通知依赖模块哪些协议被接收了，哪些被丢弃了
+######## 处理那些超时没有回复确认的协议
+
+####### 处理成功和失败都会统计数量
+
+######## 如果丢包率太高可能通知合适的模块降低发包频率
 
 ##### 保证不会处理过时协议
 
