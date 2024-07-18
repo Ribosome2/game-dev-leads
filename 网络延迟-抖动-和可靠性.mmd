@@ -135,33 +135,29 @@
 ######## InFlightPacket 发了但是还没被确认收到的
 
 ###### 接收时，对决定接收的packet发送确认接收
-> collapsed=`true`,leftSide=`true`
+> leftSide=`true`
 
 
 ####### DeliveryNotificationManager::ProcessSequenceNumber
-> collapsed=`true`
-
 
 ######## 用NextExpectedSequenceNumber来决定<br/>packet要不要处理，或者丢弃 这就是保证处理顺序的机制
 
 ######## 读到序列号的三种情况
-> collapsed=`true`
-
 
 ######### 序列号跟预期的序列号一致
-> collapsed=`true`,fillColor=`#49FF00`
+> fillColor=`#49FF00`
 
 
 ########## 确认接收，并处理协议，预期序列号\+1
 
 ######### 序列号比预期的要小
-> collapsed=`true`,leftSide=`true`,mmd.emoticon=`emotion_ghost`
+> leftSide=`true`,mmd.emoticon=`emotion_ghost`
 
 
 ########## 意味着已经有更新的packet到达了，这个时候不需要处理，也不需要确认
 
 ######### 序列号比预期的要大
-> collapsed=`true`,fillColor=`#00DBFF`,leftSide=`true`,mmd.emoticon=`lightning`
+> fillColor=`#00DBFF`,leftSide=`true`,mmd.emoticon=`lightning`
 
 
 ########## 序列号小的延迟或者丢包了就会发生这种情况
@@ -177,8 +173,6 @@
 
 
 ######## 要确认的序列号不是每个都单独确认，<br/>而是收集起来一次性发区间确认
-> collapsed=`true`
-
 
 ######### 区间连续的话发一个AckRange就行，不连续就构建多个区间
 
@@ -201,3 +195,63 @@
 ##### 保证不会处理过时协议
 
 ###### 比如新packet到了，旧的协议就当作被丢掉，忽视掉<br/>防止旧协议覆盖新数据
+
+## Improved Latency Handling
+
+### conservative algorithm
+
+#### 客户端不做任何处理，等服务网同步指令才做处理<br/>这种就是保守算法
+
+### ClientSide Interpolation
+
+#### 不直接用服务的发位置更新坐标，而是本地用local perception filter来进行插值
+
+#### 是在拿到服务器数据之后才做插值，只是看起来更平滑了，但是实际比保守算法更延后？
+
+### ClientSide Predition
+
+#### 从interpolation 转到extrapolation
+
+#### 这里没懂，comeback
+
+#### Dead Reckonging 
+> fillColor=`#FF6400`
+
+
+##### 航海术语，航道预测，
+
+###### dead 可能是拼写错误流传，可能是deduced
+
+##### 游戏中就是假设游戏实体会保持做目前做的事情，，然后预测实体的行为的过程
+
+##### 相对保守算法，这算是optimistic algorithm
+
+##### 遇到预测不对的三种处理方式
+
+###### 立刻更新为最新的，能保证最新但是会跳
+> fillColor=`#FF6400`
+
+
+###### 插值
+
+###### Second\-order state adjustment
+
+### ClientSide Rewind
+
+### Server Side Rewind
+
+#### 长距离，及时击中的武器同步
+
+#### 核心思想是把服务器的状态回滚到玩家射击时候观察到状态
+
+#### 需要对客户端预测的方法做些调整
+
+##### remote player 不进行dead reckoning
+
+##### Use local move  prediction and move replay 
+
+###### 本地玩家还是即时响应？
+
+##### Record the client's view in each move packet sent to  the server
+
+##### On server ,store the poses of every relevant object for the last several frames
