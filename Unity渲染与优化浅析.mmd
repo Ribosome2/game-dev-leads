@@ -31,3 +31,69 @@
 #### UGUI优化
 
 #### 定位的工具的手法
+
+### SkinMesh动画烘培
+
+#### 4,000 Adams at 90 Frames <br/>Per Second | Yi Fei Boon
+> mmd.emoticon=`agp`
+
+- LINK
+<pre>https://www.youtube.com/watch?v=rXqKu9uC0f4&amp;ab_channel=GameDailyConnect</pre>
+
+##### 动画数据烘培思路
+
+###### BasePose作为基准，记录的数据为和基准位置的偏移<br/>第N帧的数据=Base \+ FrameN\_Data
+
+###### 偏移向量XYZ映射到贴图的RGBA
+
+####### RGB的值是0\-1之间的，XYZ的值是从float\.min 到float\.max的<br/>所以需要对XYZ进行normalize 重新映射到0\-1之间
+
+######## 1\.对XYZ归一
+
+######## 2\.Result=nomlize\(xyz\)\+Magnitude
+
+######### 其中Magnitude是所有顶点的最大值
+
+######## 3\.Mapp normalize XYZ from \[\-1 ,1\]映射到\[0\-1\]<br/>\(each CYZ component \+1 then devide by 2\)
+
+######## 4\.Sore normalized and  remapped XY to RGB
+
+####### A通道存储的是normalized magnitude
+
+###### 每个像素记录的是一个顶点的某一帧的动画数据
+
+###### 每一行记录的是帧的数据
+
+####### 比如，如果顶点数为1070，帧数为507<br/>要创建的贴图大小就是1070x507<br/>\(可能加一些padding 让贴图变成POT\)
+
+##### 渲染时候读取数据的策略
+
+###### Bake的时候修改Mesh的UV\(2通道）
+
+####### U=顶点索引/TextureWidth
+
+####### V跟随帧变化
+
+###### 贴图设置
+
+####### Bypass sRGB sampleing o prevent data skewing<br/>\(贴图导入的一个设置）
+
+####### 用RGBA32来保持数据精度
+
+###### shader读取的时候
+
+####### float4 animMap =tex2Dlod\(\_AnimTex,float4\(v\.texcoord1\.x,v\.texcoord1\.y\+\_OffsetY,0,0\)\);<br/>float dirVec =float4\(\(animMap\.r\*2\.0\-1\.0,\(animMap\.g\*2\.0\)\-1\.0,\(animMap\.b\*2\.0\)\-1\.0,0\.0\);<br/>v\.vertex \+=dirVec \* animMap\.a\*\_Scale
+> align=`left`
+
+
+#### 这种方案的限制性
+
+##### 没法再不同的动画片段间进行blend
+
+##### 失去了骨骼动画的优势
+
+###### 比如IK和挂物体再骨骼上
+
+###### 顶点数和帧数受限于贴图大小
+
+###### 如果瓶颈本来就在GPU就不适合
