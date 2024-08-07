@@ -1,0 +1,35 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# 服务器安全
+> mmd.emoticon=`tree`
+
+
+## Securing the server
+
+### DOS
+
+### Bad Data
+
+#### 故意发非法数据上去，比如在协议前面写了<br/>有10个数据，但实际上只有更少的<br/>看看能不能把服务器搞崩
+
+### Timing Attack
+
+#### 如果服务器写了提前的return 条件，别人就可以用枚举的方式<br/>来测试哪个数据是会触发提前返回的，从而猜测出正确的值
+
+#### 解决办法是改写函数 使任意的输入的耗时都是一样的
+
+### Intrusions
+
+#### 入侵服务器
+
+#### 防范
+
+##### 保持服务器机子上的软件更新，防止别人利用旧版本未修复的bug
+
+##### Spear phishing attack
+
+###### 侵入有权限管理中心服务器的个人电脑
+
+###### 尽量实现二重验证，只知道密码不能进入

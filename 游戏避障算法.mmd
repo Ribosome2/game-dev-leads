@@ -48,6 +48,8 @@
 
 ##### 找出让速度向量V离开碰胡子那个域的最小附加速度向量u
 
+#### C\+\+仓库
+
 ## CleanPath
 > leftSide=`true`
 
@@ -67,6 +69,46 @@
 ### 用来查询最近点的数据结构
 - LINK
 <pre>https://www.youtube.com/watch?v=BK5x7IUTIyU&amp;ab_channel=Computerphile</pre>
+
+### K代表的是多少维，D是demension
+
+### KD树是什么
+
+#### 表示k维点的二叉树结构
+
+#### 每个非叶子节点作为一个超平面（hyperplane\),把空间划分为两部分
+
+#### 构建过程
+
+##### 当本地agent数量和Simulator的agent数量不一样的时候创建新的<br/>AgentTree节点的数量是agent数量的两倍
+
+##### 从第一个agent递归的构建树
+
+###### 先遍历begin到end的agent找出所有agent的XY轴的最大最小值
+
+###### 根据两个轴的区间范围的距离来决定要水平分割还是竖直分割<br/>代码例子是用区间小的
+
+###### 用选择区间的计算出中间的分割值
+
+###### 当left比right小的时候，一直迭代
+> leftSide=`true`
+
+
+####### 左边agent值比分界的小的话，left\+1
+
+####### 右边agent值比分界值大的话，right\-1
+> leftSide=`true`
+
+
+####### 当left\<right的时候，交换对应agent位置
+
+###### 继续递归构建左树和右树
+> leftSide=`true`
+
+
+#### KDTreeWiki
+- LINK
+<pre>https://en.wikipedia.org/wiki/K-d_tree</pre>
 
 ## FlowField
 - LINK
