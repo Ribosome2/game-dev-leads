@@ -3,6 +3,8 @@
 ---
 
 # Root topic
+> collapsed=`true`
+
 
 ## HybridCLR
 
@@ -29,3 +31,121 @@
 ##### Interpreter IL指令解析执行
 
 ###### HybridCLR不仅支持传统的全解释执行模式，还开创性地实现了 Differential Hybrid Execution\(DHE\)<br/> 差分混合执行技术。即可以对AOT dll任意增删改，会智能地让变化或者新增的类和函数以interpreter模式运行，<br/>但未改动的类和函数以AOT方式运行，让热更新的游戏逻辑的运行性能基本达到原生AOT的水平。
+
+### 项目引入流程
+- LINK
+<pre>https://hybridclr.doc.code-philosophy.com/docs/beginner/quickstart</pre>
+
+#### 项目添加到PackageMananger
+
+#### Install
+
+##### 生成内容 HybridCLRData文件夹
+
+###### hybridclr\_repo
+
+####### 看里面内容没有代码，只是把文档和说明切下来？
+
+###### il2cpp\_plus\_repo 的拓展库
+
+###### LocalIl2CppData\-WindowsEditor
+
+#### 创建热更新代码模块
+
+##### 如果项目把Assembly\-CSharp作为AOT程序集，强<br/>烈建议关闭热更新程序集的auto reference选项
+
+##### 打开菜单 HybridCLR/Settings， 在Hot Update Assemblies配置项中添加HotUpdate程序集
+
+#### 配置PlayerSetting
+
+##### 使用IL2CPP backend 和net版本
+
+#### 打包前执行的
+
+##### HybridCLR/Generate/All
+
+###### 生成内容
+
+####### AssembliesPostIl2CppStrip
+
+######## 好像都是Unity自带的DLL
+
+####### StrippedAOTDllsTempProj
+
+######## 裁剪后的临时工程？
+
+####### HotUpdateDlls
+
+######## 这个目录是热更新的代码，包含Unity的运行库和HybridCLR的运行库
+
+######## 如果项目代码之前没用到，后面才用到，后续生成就会新增在这个目录
+
+##### 修改了代码之后刷新热更代码文件
+
+###### HybridCLR/CompileDll/ActiveBulidTarget
+
+#### 防止代码被strip掉
+
+##### HybridCLR/Generate/LinkXml
+
+###### 主动点击工具会分析出来哪些代码项目里面是有用到的会添加到列表里面
+
+##### 也可以在HybridCLR/Settings菜单弹出的界面设置
+
+#### mono代码的更新
+
+##### Mono和其他代码都在一个程序集的情况下，
+
+###### 直接在原来的mono加字段，没问题
+
+###### 直接加新的mono，挂在GameObject上面的那种，也没问题<br/>那我说什么要搞个平替组件？
+
+### 泛型的使用
+
+#### 使用热更新中定义的泛型类或函数
+
+##### 直接使用就行
+
+#### 使用AOT中定义的泛型类或函数
+
+##### 如果AOT中已经有代码实例化过某个泛型类或者函数，则热更新中可以直接使用
+
+##### 但如果AOT中没有实例化过某个AOT泛型类<br/>或者函数，解决办法有几种
+> fillColor=`#FF32E8`
+
+
+###### 1\.在AOT代码添加相应的实例化代码。
+
+####### AOT代码中添加实例化代码需要重新打包，不仅开发期很麻烦，上线后短期内重新发主包是不现实的。
+
+####### 泛型参数有可能是热更新类型，不可能在AOT中提前实例化
+
+###### 2\.补充元数据技术。 这是HybridCLR的专利技术，社区版本也能使用。
+> fillColor=`#FF32E8`
+
+
+####### 根据文档的说法，好像只是使用泛型的时候需要
+
+####### 生成的文件会自动复制到
+
+######## \{project\}/HybridCLRData/AssembliesPostIl2CppStrip/\{target\}
+
+####### HybridCLR\.RuntimeApi\.LoadMetadataForAOTAssembly函数为AOT泛型补充元数据。<br/> 元数据只需要补充一次，推荐在执行任何热更新代码前
+> fillColor=`#FF7DC6`
+
+
+####### AOTGenericReferences\.cs
+> fillColor=`#B600FF`
+
+
+######## 文件中还包含了应该补充元数据的assembly列表，<br/>方便开发者不需要运行游戏也能快速知道应该补充哪些元数据。
+> fillColor=`#FF96BA`
+
+
+###### full generic sharing 完全泛型共享技术，
+> fillColor=`#A47171`
+
+
+####### 相比补充元数据技术，工作流更简单，既不需要随包携带或者下载补充元数据dll，<br/>也不需要加载补充元数据dll，包体大小和内存都明显降低。该技术目前只在商业化版本提供。
+> fillColor=`#5B3F3F`
+
