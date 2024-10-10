@@ -1,0 +1,71 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# The Root Topic
+> mmd.emoticon=`tree`
+
+
+## RendererPipelineAsset
+> leftSide=`true`
+
+
+### RendererList 可以包含多个Renderer
+
+#### RendererData Asset
+
+##### Controls high\-level rendering logic and pass for URP
+
+##### Supports Forward and Deferred paths 
+
+##### Includes a 2D Renderer
+
+### 在项目的Graphics 设置里面把Pipeline设置之后才会是URP<br/>没设置就还是默认管线（如果在Quality里面设置了，也会是URP\)
+
+## 把旧管线切换到URP
+
+### Converting Existing Sceness
+
+#### Windows/Rendering/RenderPipelineConverter
+
+##### AnimationClip Convertor
+
+###### 为了当动画片段引用新的材质？<br/>动画片段哪里需要引用材质？
+
+##### 只能转换掉官方自带的Shader相关的，不能转换自定义的
+
+## 常用的Shader
+> leftSide=`true`
+
+
+### URP/Lit
+
+#### PBR渲染，类似默认的Stanar Shader
+
+### URP/SimpleLit
+> leftSide=`true`
+
+
+#### 用的是Blinn\-Phong 模型，适合低端设备，以及不适用PBR的游戏
+
+### URP/Unlit
+> leftSide=`true`
+
+
+#### 不使用光照公式的，性能最好
+
+### URP/Particles/
+> leftSide=`true`
+
+
+#### 粒子相关，这下面有自己的Lit/SimpleLit/Unlit 版本
+
+### 默认Shader和URP Shader的映射关系
+- LINK
+<pre>https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@12.1/manual/upgrading-your-shaders.html</pre>
+
+## 设置Quality等级相关
+
+### 每个等级都可以指定一个管线
+
+#### 如果没有指定，就是用Graphics 设置里面的
