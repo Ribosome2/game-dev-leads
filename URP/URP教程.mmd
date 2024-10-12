@@ -368,9 +368,35 @@
 
 ## 性能优化和调试
 
-### Target 60fps Unity URP Performance Optimisation & Analysis for mobile devices
+### Target 60fps Unity URP Performance Optimisation <br/>& Analysis for mobile devices
 - LINK
 <pre>https://www.youtube.com/watch?v=FjcNSjf7tvw&amp;ab_channel=IndiaGDC</pre>
+
+#### PipelineAsset
+
+##### 低端机改成用逐顶点光照
+
+#### Shadow
+
+##### Max Distance
+
+###### 越低越好
+
+##### Cascade Count
+
+###### 根据距离生成不同的shadow map
+
+#### Light
+
+#### CameraSettings
+
+##### FarClipPlane
+
+###### 低端机设置很小，用Fog
+
+#### Post Processing
+
+##### Down Sample Frame \-SetResolution\(\)
 
 ### URPAsset 设置DebugLevel为 Profiling才能看到详细信息
 
