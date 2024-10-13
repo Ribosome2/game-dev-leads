@@ -1,0 +1,25 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# The Root Topic
+> mmd.emoticon=`tree`
+
+
+## DrawCall优化
+
+### Dynamic Batching
+
+#### 限制
+
+##### 只能对顶点属性少于9000并且<br/>顶点数少于300的网格应用
+> fillColor=`#FF2B00`
+
+
+###### 因为dynamic batching for meshed has an ovverhead per vertex
+
+###### 比如说顶点由pos,nomal,uv, 那就能到300个，<br/>如果再加uv1,tangent 那就只能900/5=180个顶点
+> fillColor=`#37FF00`
+
+
+##### 材质实例得是一样的，不然就算shader一样也不行

@@ -1,0 +1,31 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# The Root Topic
+> mmd.emoticon=`tree`
+
+
+## 概念
+
+### kernel
+
+#### ComputeShader里面可以有多个核心，每个核指定使用哪个函数<br/>格式为 \#pragma kernel CSMain
+
+#### C\# 可以用Dispatch 来调用kernel
+
+##### shader\.Dispatch\(kernelHandle,threadGroupsX,threadGroupsY,threadGroupsZ\)
+
+### RWTexture2D
+
+#### compute shader里面用来存储结果数据结构
+
+#### C\# 可以用 shader\.SetTexture\(kernelHandle,"Result",outputTexture\);<br/>来指定把结构输入到哪个RT,不设置也不会报错
+
+### numthreads\(8,8,1\)\] 函数头
+
+#### ThreadGroup的概念 前面的含义是这个纤程组会由8x8的格子组成
+
+### DispatchThreadId
+
+#### 左下角是（0，0）
