@@ -18,4 +18,26 @@
       * 非自带的属性 必须用名为 UnityPerMaterial 的 constant buffer 里面
       * 不要使用MaterialBlock,(默认管线使用这个是为了，修改材质属性，但是不打断DC合批)，但是SRP 不兼容
 * BatchRenderGroup
-* 
+  * BRG 生成draw commands
+  * 用FilterSetting来什么时候渲染实例，
+  * Draw ranges
+  * 项目设置
+    * 启用SRP Batcher
+    * 保留BRG shader variants:Edit>ProjectSettings>Graphics 设置BatchRendererGroup variants 为Keep All
+    * 如果是用了URP,最好关掉Strip Unused Variants
+    * 允许 unsafe code
+    * BatchRendererGroup使用DOTS Instancing shader,但并要求任何DOTS Packages,名字只体现面向数据的方式加载实例数据
+  * 在URP创建BRG Renderer
+    * 初始化BRG:
+      * OnPerformCulling是主要入口，用来剔除可视对象的回调
+        * 这个函数的两个主要作用：
+          * 根据BatchCullingContext 决定是否剔除对象
+          * 输出渲染对象的draw commands:写入BatchCullingOutput 参数
+    * 把网格和材质注册到BRG
+      * BatchRendererGroup.RegisterMesh
+      * BatchRenderGroup.RegisterMaterial
+    * 创建Batches
+      * 每个batch 由 matadata 数据集 和 一个共享的GraphicBuffer
+        * 创建元数据值后不能修改这些值，如果需要更改任何数据，需要创建一个新的Batch并删除旧的
+        * 但是可以通过SetBatchBuffer随时修改Batch的GraphicsBuffer
+      * BatchRendererGroup.AddBatch

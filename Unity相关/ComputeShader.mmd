@@ -16,6 +16,8 @@
 
 ##### shader\.Dispatch\(kernelHandle,threadGroupsX,threadGroupsY,threadGroupsZ\)
 
+##### 参数应该是调用多少个组的意思
+
 ### RWTexture2D
 
 #### compute shader里面用来存储结果数据结构
@@ -26,6 +28,30 @@
 
 #### ThreadGroup的概念 前面的含义是这个纤程组会由8x8的格子组成
 
+#### 比如调用的时候用\(2,2,1\)的话就是会调用\(8\*2 \* 8\*2\)个坐标的的线程组进行计算
+
 ### DispatchThreadId
 
-#### 左下角是（0，0）
+#### 左下角是（0，0），每个组的数量和下标会乘以numthreads定义的x,y，z 三个轴
+
+## 数据传输
+> leftSide=`true`
+
+
+### 每个Kernel要单独设置Texture属性，用kernelHandlle作为参数
+
+### 如果由多个kernel要对同一个texture进行写入，可以用shared关键字
+
+## ComputeBuffer
+> leftSide=`true`
+
+
+### shader定义StructuredBuffer 来存放只读的属性
+
+### C\#端创建CPU的buffer ComputeBuffer\(int count, int stride\)
+
+### 可以自定义数据结构，注意步长计算清楚就行
+
+### RWStructuredBuffer,放可读可写数据
+
+#### ComputBuffer\.GettData可以从GPU把数据读回到CPU
