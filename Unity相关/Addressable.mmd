@@ -1,0 +1,41 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Unity的Addressable系统
+> mmd.emoticon=`tree`
+
+
+## 是基于Unity的AssetBunbles开发的一套资源管理框架
+
+### 想使用AB但是又不想写管理代码的时候可以选用
+
+### 把资源标记为Addressable之后，<br/>就可以用资源的路径在任意的地方进行加载了
+
+#### 资源可以放在本地或者CDN
+
+### Overview
+
+#### 随着项目的规模变化，动态修改资源的粒度策略<br/>只需要修改很少或者不需要修改代码
+
+#### 可以用不同的工程来创建和打包不同的资源<br/>然后再主工程都可以加载它们
+> fillColor=`#00FF37`
+
+
+#### 自动管理依赖和内存
+
+##### 内部用引用计数来追踪一个资源是否被引用
+
+#### 高效的资源打包
+
+##### 默认使用AB对资源进行打包，也可以通过<br/>实现IResourceProvider的类来支持其他方式访问资源
+
+#### 一些概念
+
+##### Asset address
+
+###### 定位资源的字符串
+
+##### AssetReferences
+
+###### 一种用来在Inspector对可寻址资源进行赋值的类型
